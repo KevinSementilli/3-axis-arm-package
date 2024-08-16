@@ -1,0 +1,1 @@
+controller_joint_names: ['', 'rotating_base_joint', 'actuator_1_joint', 'actuator_2_joint', ]

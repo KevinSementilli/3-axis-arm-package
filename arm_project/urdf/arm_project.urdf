@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot xmlns:xacro="https://www.ros.org/wiki/xacro" name="gr_007_v1">
+ 
+ <link name="world"/>
+  <joint name="base_joint" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  </joint>
+ 
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.011554 -6.139E-05 0.056675"
+        rpy="0 0 0" />
+      <mass
+        value="2.015" />
+      <inertia
+        ixx="0.0080998"
+        ixy="-5.988E-08"
+        ixz="8.5967E-05"
+        iyy="0.0092524"
+        iyz="-9.6945E-07"
+        izz="0.014549" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.62745 0.62745 0.62745 1" />
+      </material>
+    </visual>
+    
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="rotating_base_link">
+    <inertial>
+      <origin
+        xyz="-5.9057E-05 -0.069841 -0.035318"
+        rpy="0 0 0" />
+      <mass
+        value="2.16" />
+      <inertia
+        ixx="0.0050965"
+        ixy="4.203E-06"
+        ixz="-2.4762E-06"
+        iyy="0.0052669"
+        iyz="-0.00063764"
+        izz="0.0064535" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.96078 0.96078 0.96471 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="rotating_base_joint"
+         type="continuous">
+    <origin
+      xyz="0 0.0825 0.2035"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rotating_base_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+  <link name="actuator_1_link">
+    <inertial>
+      <origin
+        xyz="0.007401 -0.1848 0.10588"
+        rpy="0 0 0" />
+      <mass
+        value="0.18" />
+      <inertia
+        ixx="0.0041197"
+        ixy="-1.4871E-07"
+        ixz="-0.00026364"
+        iyy="0.0043468"
+        iyz="7.2857E-06"
+        izz="0.00038839" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.62745 0.62745 0.62745 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="actuator_1_joint"
+         type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="rotating_base_link" />
+    <child
+      link="actuator_1_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.9199"
+      upper="1.9199"
+      effort="109.35"
+      velocity="1.3" />
+  </joint>
+
+  <link name="actuator_2_ mid_link">
+    <inertial>
+      <origin
+        xyz="0.014659 -0.08821 0.20896"
+        rpy="0 0 0" />
+      <mass
+        value="1.72" />
+      <inertia
+        ixx="0.00067739"
+        ixy="1.5844E-15"
+        ixz="2.7864E-17"
+        iyy="0.00090551"
+        iyz="-4.25E-06"
+        izz="0.0006623" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="actuator_2_mid_joint"
+         type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="actuator_1_link" />
+    <child
+      link="actuator_2_mid_link" />
+    <axis
+      xyz="0 0 0" />
+    <limit
+      lower="-1.9199"
+      upper="1.9199"
+      effort="0"
+      velocity="0" />
+  </joint>
+
+  <link name="actuator_2_link">
+    <inertial>
+      <origin
+        xyz="0.0031088 0.1801 0.10635"
+        rpy="0 0 0" />
+      <mass
+        value="0.18" />
+      <inertia
+        ixx="0.0041359"
+        ixy="-8.4085E-07"
+        ixz="-9.7495E-05"
+        iyy="0.0043469"
+        iyz="-7.2278E-06"
+        izz="0.0003724" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.62745 0.62745 0.62745 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="actuator_2_joint"
+         type="revolute">
+    <origin
+      xyz="0.01434 -0.1597 0.20924"
+      rpy="0 0 0" />
+    <parent
+      link="actuator_2_mid_link" />
+    <child
+      link="actuator_2_link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.9199"
+      upper="1.9199"
+      effort="109.35"
+      velocity="1.3" />
+  </joint>
+
+  <link name="actuator_3_link">
+    <inertial>
+      <origin
+        xyz="0.005822 0.08351 0.2107"
+        rpy="0 0 0" />
+      <mass
+        value="1.72" />
+      <inertia
+        ixx="0.00067739"
+        ixy="1.0496E-15"
+        ixz="2.64E-17"
+        iyy="0.00090551"
+        iyz="-4.25E-06"
+        izz="0.0006623" />
+    </inertial>
+
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://gr_007_v1/meshes/link_5.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="actuator_3_joint"
+         type="fixed">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="actuator_2_link" />
+    <child
+      link="actuator_3_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <transmission name="rotating_base_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="rotating_base_joint">
+          <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface></joint>
+      <actuator name="rotating_base_motor">
+          <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+
+  <transmission name="actuator_1_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="actuator_1_joint">
+          <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface></joint>
+      <actuator name="actuator_1_motor">
+          <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+
+  <transmission name="actuator_2_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="actuator_2_joint">
+          <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface></joint>
+      <actuator name="actuator_2_motor">
+          <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+          <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+
+  <gazebo>
+      <plugin name="control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+      </plugin>
+ </gazebo>
+
+  <gazebo>
+    <plugin name="control"
+            filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="rotating_base_link">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="actuator_1_link">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <gazebo reference="actutator_2_link">
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+</robot>
