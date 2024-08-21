@@ -379,13 +379,6 @@
       </plugin>
  </gazebo>
 
-  <gazebo>
-    <plugin name="control"
-            filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
-    </plugin>
-  </gazebo>
-
   <gazebo reference="rotating_base_link">
     <selfCollide>true</selfCollide>
   </gazebo>
@@ -394,7 +387,7 @@
     <selfCollide>true</selfCollide>
   </gazebo>
 
-  <gazebo reference="actutator_2_link">
+  <gazebo reference="actuator_2_link">
     <selfCollide>true</selfCollide>
   </gazebo>
 
