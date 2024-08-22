@@ -14,9 +14,9 @@ find_package(geometry_msgs REQUIRED)
 find_package(urdf REQUIRED)
 find_package(xacro REQUIRED)
 find_package(gazebo_ros REQUIRED)
-find_package(control_msgs REQUIRED)  # Added
-find_package(trajectory_msgs REQUIRED)  # Added
-find_package(moveit_ros_planning_interface REQUIRED)  # Optional for MoveIt!
+find_package(control_msgs REQUIRED) 
+find_package(trajectory_msgs REQUIRED)
+# find_package(moveit_ros_planning_interface REQUIRED)  # Optional for MoveIt!
 
 # include directories
 include_directories(
@@ -37,22 +37,11 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-# Add any executables or libraries
-# add_executable(${PROJECT_NAME}_node src/your_node.cpp)
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${rclcpp_LIBRARIES}
-#   ${std_msgs_LIBRARIES}
-#   ${sensor_msgs_LIBRARIES}
-#   ${geometry_msgs_LIBRARIES}
-#   ${urdf_LIBRARIES}
-#   ${xacro_LIBRARIES}
-#   ${gazebo_ros_LIBRARIES}
-# )
-# install(TARGETS ${PROJECT_NAME}_node
-#   DESTINATION lib/${PROJECT_NAME})
+add_executable(joint_publisher src/joint_publisher.cpp)
+ament_target_dependencies(joint_publisher rclcpp trajectory_msgs)
 
 # Directories to install
-set(DIRS config launch meshes urdf)
+set(DIRS config launch meshes robot_description)
 
 # Install each directory
 foreach(dir ${DIRS})

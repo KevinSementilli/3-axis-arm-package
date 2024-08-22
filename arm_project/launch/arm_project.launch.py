@@ -18,8 +18,62 @@ def generate_launch_description():
     # Define paths
     gazebo_ros_pkg = get_package_share_directory('gazebo_ros')
     arm_project_pkg = get_package_share_directory('arm_project')
-    urdf_file = os.path.join(arm_project_pkg, 'urdf', 'arm_project.urdf')
+    urdf_file = os.path.join(arm_project_pkg, 'robot_description', 'arm_project.urdf')
     controller_config_file = os.path.join(arm_project_pkg, 'config', 'joint_trajectory_controller.yaml')
+    gazebo_launch_file = os.path.join(gazebo_ros_pkg, 'launch', 'gazebo.launch.py')
+
+    # Include the Gazebo launch file
+    gazebo = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(gazebo_launch_file),
+            launch_arguments={'gui': 'true', 'server': 'true'}.items()
+        )
+    
+    # Spawn the robot model in Gazebo
+    spawn_entity = Node(
+            package='gazebo_ros',
+            executable='spawn_entity.py',
+            name='spawn_urdf',
+            output='screen',
+            arguments=[
+                '-entity', 'three_axis_bot',
+                '-x', LaunchConfiguration('arg_x'),
+                '-y', LaunchConfiguration('arg_y'),
+                '-z', LaunchConfiguration('arg_z'),
+                '-Y', LaunchConfiguration('arg_Y'),
+                '-param', 'robot_description',
+                '-urdf', '-model', 'three_axis_bot',
+                '-J', 'rotating_base_joint', '0.0',
+                '-J', 'actuator_1_joint', '0.0',
+                '-J', 'actuator_2_joint', '0.0'
+            ]
+        )
+    
+    # Launch the controller_manager node
+    controller_launcher = Node(
+            package='controller_manager',
+            executable='ros2_control_node',
+            name='controller_manager',
+            parameters=[controller_config_file],
+            output='screen',
+        )
+    
+    # Spawn the controllers
+    controller_spawner = Node(
+            package='controller_manager',
+            executable='spawner',
+            name='controller_spawner',
+            output='screen',
+            arguments=['joint_state_controller', 'robot_arm_controller']
+        )
+    
+    # Robot state publisher node
+    node_robot_state_publisher = Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='robot_state_publisher',
+            output='screen',
+            parameters=[{'robot_description': urdf_file, 'use_sim_time': True}]
+        )
 
     # Launch description
     return LaunchDescription([
@@ -30,58 +84,9 @@ def generate_launch_description():
         declare_arg_P,
         declare_arg_Y,
 
-        # Include the Gazebo empty world launch file
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(os.path.join(gazebo_ros_pkg, 'launch', 'empty_world.launch.py'))
-        ),
-
-        # Static transform publisher node
-        Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='tf_footprint_base',
-            arguments=['0', '0', '0', '0', '0', '0', 'base_link', 'base_footprint', '40'],
-        ),
-
-        # Spawn the robot model in Gazebo
-        Node(
-            package='gazebo_ros',
-            executable='spawn_entity.py',
-            name='spawn_urdf',
-            output='screen',
-            arguments=[
-                '-x', LaunchConfiguration('arg_x'),
-                '-y', LaunchConfiguration('arg_y'),
-                '-z', LaunchConfiguration('arg_z'),
-                '-Y', LaunchConfiguration('arg_Y'),
-                '-param', 'robot_description',
-                '-urdf', '-model', 'gr_007_v1',
-                '-J', 'rotating_base_joint', '0.0',
-                '-J', 'actuator_1_joint', '0.0',
-                '-J', 'actuator_2_joint', '0.0'
-            ]
-        ),
-
-        # Load the joint trajectory controller
-        ExecuteProcess(
-            cmd=['ros2', 'param', 'load', 'controller_manager', controller_config_file],
-            output='screen'
-        ),
-
-        # Spawn the controllers
-        Node(
-            package='controller_manager',
-            executable='spawner',
-            name='controller_spawner',
-            output='screen',
-            arguments=['joint_state_controller', 'robot_arm_controller']
-        ),
-
-        # Robot state publisher node
-        Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            name='robot_state_publisher',
-            output='screen'
-        )
+        gazebo,
+        spawn_entity,
+        controller_launcher,
+        controller_spawner,
+        node_robot_state_publisher
     ])

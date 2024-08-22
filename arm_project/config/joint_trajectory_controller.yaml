@@ -1,9 +1,21 @@
-#Controller to control robot arm joints
-robot_arm_controller:
-  type: "position_controllers/JointTrajectoryController"
-  joints: [rotating_base_joint, actuator_1_joint, actuator_2_joint]
+controller_manager:
+  ros__parameters:
+    
+    # Controller to control robot arm joints
+    robot_arm_controller:
+      type: "joint_trajectory_controller/JointTrajectoryController"
+      joints: 
+        - rotating_base_joint
+        - actuator_1_joint
+        - actuator_2_joint
+      state_publish_rate: 50
+      
+      constraints:
+        goal_time: 1.0
+        stopped_velocity_tolerance: 0.01
+        interpolation_method: "linear"
 
-#Controller to continuously publish joint states/positions 
-joint_state_controller:
-  type: "joint_state_controller/JointStateController"
-  publish_rate: 50
+    # Controller to continuously publish joint states/positions
+    joint_state_controller:
+      type: "joint_state_broadcaster/JointStateBroadcaster"
+      publish_rate: 50

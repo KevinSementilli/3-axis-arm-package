@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>arm_project</name>
+  <version>0.0.1</version>
+  <description>
+    <p>URDF Description package for simulating a 6-axis arm robot in Gazebo and RViz</p>
+    <p>This package contains configuration data, 3D models, launch files, and controllers for the robot.</p>
+  </description>
+  
+  <author email="ksementilli@hotmail.ca">Kevin</author>
+  <maintainer email="ksementilli@hotmail.ca">Kevin Sementilli</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <build_depend>message_generation</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>urdf</build_depend>
+  <build_depend>xacro</build_depend>
+  <build_depend>gazebo_ros</build_depend> <!-- Added for Gazebo-ROS integration -->
+  <build_depend>control_msgs</build_depend> <!-- Added for robot control -->
+  <build_depend>trajectory_msgs</build_depend> <!-- Added for trajectory execution -->
+
+  <depend>roslaunch</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>rviz</depend>
+  <depend>joint_state_publisher_gui</depend>
+  <depend>gazebo</depend>
+  <depend>moveit_simple_controller_manager</depend>
+  <depend>moveit_ros_planning_interface</depend> <!-- Added for MoveIt! planning -->
+  
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <build_export_depend>urdf</build_export_depend>
+  <build_export_depend>xacro</build_export_depend>
+  
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>urdf</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <exec_depend>control_msgs</exec_depend> <!-- Added for runtime control dependencies -->
+  <exec_depend>trajectory_msgs</exec_depend> <!-- Added for runtime trajectory execution -->
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

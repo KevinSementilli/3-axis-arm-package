@@ -1,0 +1,1 @@
+roscpp;rospy;std_msgs;geometry_msgs;urdf;xacro;roslaunch;robot_state_publisher;rviz;joint_state_publisher_gui;gazebo;moveit_simple_controller_manager;moveit_ros_planning_interface;message_runtime;control_msgs;trajectory_msgs;ament_lint_auto;ament_lint_common
